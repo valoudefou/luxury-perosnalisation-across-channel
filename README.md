@@ -1,3 +1,15 @@
+# LVMH – Omnichannel Customer Journey and Data Flow
+
+This document illustrates the **end-to-end customer journey and data flow** across digital and physical touchpoints in the LVMH omnichannel ecosystem.  
+It shows how AB Tasty, CRM systems, the mobile app, and in-store clienteling connect to deliver a consistent personalised experience.
+
+---
+
+## 1. Overview (Flowchart)
+
+The flowchart below visualises **how data moves between systems** — from the website visit to in-store interaction — and highlights GDPR compliance.
+
+```mermaid
 %% LVMH - Omnichannel Customer Journey (Flowchart)
 flowchart TD
     A[Website Visitor] -->|Visits Gift Category| B[AB Tasty]
