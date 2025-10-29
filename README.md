@@ -20,25 +20,25 @@ It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect 
 The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
-%% Simplified Omnichannel Customer Journey (Flowchart)
+%% Simplified Omnichannel Customer Journey
 flowchart TD
-    A[Website Visitor] -->|Visits Gift category| B[AB Tasty]
-    B -->|Generates anonymous ID & tracks behaviour| C[AB Tasty Data]
-    A -->|Requests back-in-stock alert (Gift tag)| D[CRM]
-    D -->|Stores email & creates unique ID| E[CRM Database]
-    D -->|Sends product recommendation email| F[User Inbox]
-    F -->|Clicks alternative product link| G[Mobile App]
-    G -->|Creates account & syncs with CRM| E
-    G -->|Sends app events| H[Wandz SDK]
-    E -->|Stores Gift segment & unique ID| I[CRM Hub]
-    I -->|Syncs ID to website (cookie)| J[Web Login]
-    J -->|Recognises user & personalises| B
-    I -->|Shares user data with store app| K[In-Store App]
-    K -->|User identified by QR/barcode| I
+    A[Website visitor] -->|Visit Gift category| B[AB Tasty]
+    B -->|Create anonymous id and track| C[Tracking data]
+    A -->|Back in stock request Gift tag| D[CRM]
+    D -->|Store email and create id| E[CRM database]
+    D -->|Send email with recommendations| F[User inbox]
+    F -->|Click product link| G[Mobile app]
+    G -->|Create account and sync| E
+    G -->|Send app events| H[Wandz SDK]
+    E -->|Store id and Gift segment| I[CRM hub]
+    I -->|Sync id cookie| J[Web login]
+    J -->|Recognise and personalise| B
+    I -->|Share profile to store app| K[In store app]
+    K -->|Identify with QR or barcode| I
 
-    subgraph GDPR Compliance
+    subgraph GDPR compliance
         note1[Data stored in EU]
-        note2[Consent managed per GDPR]
+        note2[Consent managed under GDPR]
     end
 ```
 
