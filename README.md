@@ -6,7 +6,6 @@
 2. [Flowchart – Data Flow Between Systems](#flowchart--data-flow-between-systems)
 3. [Sequence Diagram – Customer Journey Timeline](#sequence-diagram--customer-journey-timeline)
 4. [Notes](#notes)
-5. [How to View Locally](#how-to-view-locally)
 
 
 ## Overview
