@@ -143,27 +143,26 @@ sequenceDiagram
 
 ### Step 2 • Back-in-Stock Alert
 - User requests email alert.  
-- AB Tasty attaches “Gift” tag.  
+- “Gift” tag attached to payload for segmentation.  
 - CRM receives email and tag, not AB Tasty (GDPR).
 
 ### Step 3 • CRM Identification
-- CRM creates unique ID and segments user.  
-- Sends follow-up email with product recommendations.
+- CRM creates unique ID and segments user attached to Email.  
+- Sends follow-up email with AB Tasty product recommendations.
 
 ### Step 4 • Mobile App
 - User opens email link in the LVMH app.  
-- App matches email + ID with CRM.  
+- App matches email + ID with CRM upon Account Creation.  
 - Wandz SDK tracks behaviour linked to ID.  
-- GDPR enforced (consent, EU data storage).
 
 ### Step 5 • Web Login
 - Returning user logs in.  
-- Cookie from CRM identifies user.  
+- Cookie from CRM shows user ID to AB Tasty.  
 - AB Tasty syncs profile for cross-channel personalisation.
 
 ### Step 6 • In-Store
 - Clienteling app scans QR/barcode.  
-- Fetches ID, email, history, and segment.
+- Fetches ID, email, history, and segment from CRM/Database.
 
 
 ## Database and CRM Implications
@@ -176,8 +175,7 @@ sequenceDiagram
 
 - **AB Tasty:** Tracking, recommendations, ID sync.  
 - **CRM:** Central data and segmentation hub.  
-- **Wandz SDK:** Collects in-app data.  
-- **GDPR:** Explicit consent, EU-only data storage.
+- **Wandz SDK:** Collects event and creates AI predictive segmentations.  
 
 
 ## Development Requirements and Effort Breakdown
