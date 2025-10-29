@@ -106,7 +106,6 @@ flowchart LR
   E3 --> H
   F3 --> H
   H --- K
-  G --- H
 ```
 
 
