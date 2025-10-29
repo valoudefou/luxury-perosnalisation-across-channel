@@ -4,7 +4,6 @@
 [![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-green.svg)](#)
 [![Mermaid Diagrams](https://img.shields.io/badge/Visualised%20with-Mermaid-blue.svg)](https://mermaid.js.org)
 
----
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -13,14 +12,12 @@
 4. [Notes](#notes)
 5. [How to View Locally](#how-to-view-locally)
 
----
 
 ## Overview
 
 This document illustrates the **LVMH omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
 It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect to deliver a consistent, GDPR-compliant experience.
 
----
 
 ## Flowchart – Data Flow Between Systems
 
@@ -53,7 +50,6 @@ flowchart TD
     end
 ```
 
----
 
 ## Sequence Diagram – Customer Journey Timeline
 
@@ -103,7 +99,6 @@ sequenceDiagram
     CRM->>Store_App: Sends personalised data
 ```
 
----
 
 ## Notes
 - **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
