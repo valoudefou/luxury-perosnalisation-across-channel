@@ -14,7 +14,7 @@
 ## Overview
 
 This document outlines the **LVMH omnichannel customer journey** and associated **data flow** across digital and in-store systems.  
-It demonstrates how **AB Tasty**, **LVMH CRM**, **website**, **mobile app**, and **clienteling app** integrate to deliver a unified, GDPR-compliant experience.
+It demonstrates how **AB Tasty**, **LVMH CRM/Database**, **website**, **mobile app**, and **clienteling app** integrate to deliver a unified, GDPR-compliant experience.
 
 
 ## Flowchart - Data Flow Between Systems
