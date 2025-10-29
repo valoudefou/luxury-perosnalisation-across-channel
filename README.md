@@ -27,11 +27,11 @@ flowchart LR
 
   %% Step 1 - Website visit
   subgraph S1[Step 1 • Website visit]
-    A1[User visits site • selects Gift]
-    A2[AB Tasty creates anon ID]
+    A1[Anonymous User visit Gift category]
+    A2[AB Tasty creates anonymous ID]
     A3[User views product]
     A4{Out of stock?}
-    A5[Show similar products carousel]
+    A5[AB Tasty show similar products carousel]
     A6[Track views • clicks • filters]
     A1 --> A2 --> A3 --> A4
     A4 -- Yes --> A5 --> A6
@@ -42,18 +42,17 @@ flowchart LR
   subgraph S2[Step 2 • Back in stock alert]
     B1[User ignores recs]
     B2[Clicks back in stock alert]
-    B3[Enters email]
-    B4[AB Tasty logs confirmation only]
-    B5[Attach Gift tag to email payload]
-    B1 --> B2 --> B3 --> B4 --> B5
+    B3[Submits email]
+    B4[Attach Gift tag to email payload]
+    B1 --> B2 --> B3 --> B4
   end
 
   %% Step 3 - CRM identification and email
   subgraph S3[Step 3 • CRM identification and email]
     C1[CRM stores email • sets unique ID]
     C2[User in Gift segment]
-    C3[Later email • product still unavailable + recs]
-    C4[User clicks a recommended link]
+    C3[Later email is sent from CRM • Sorry product still unavailable • Email from AB with AB Tasty product recs]
+    C4[User clicks a recommended Product in Email]
     C1 --> C2 --> C3 --> C4
   end
 
@@ -61,9 +60,10 @@ flowchart LR
   subgraph S4[Step 4 • Mobile app interaction]
     D1[User lands in mobile app]
     D2[Creates account]
-    D3[Match via email + unique ID]
-    D4[Wandz SDK links events to unique ID]
-    D1 --> D2 --> D3 --> D4
+    D3[Match email in CRM/Database]
+    D4[Unique ID avalaible on app account]
+    D5[Wandz SDK links events to unique ID]
+    D1 --> D2 --> D3 --> D4 --> D5
   end
 
   %% GDPR notes
@@ -77,10 +77,10 @@ flowchart LR
 
   %% Step 5 - Web login
   subgraph S5[Step 5 • Web login]
-    E1[User logs in on website]
-    E2[AB Tasty recognises user]
-    E3[CRM unique ID available via cookie]
-    E4[Cross channel personalisation]
+    E1[User logs back on Web]
+    E2[AB Tasty recognises user via unique ID]
+    E3[CRM unique ID available to AB Tasty via cookie]
+    E4[Cross channel personalisation achieved]
     E1 --> E2 --> E3 --> E4
   end
 
