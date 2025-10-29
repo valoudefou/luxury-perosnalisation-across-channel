@@ -22,7 +22,7 @@ The diagram below shows how user data travels across systems from the website vi
 ```mermaid
 %% Omnichannel Customer Journey (Flowchart)
 flowchart TD
-    A[Website Visitor] -->|Visits Gift category| B[AB Tasty]
+    A[Website Anonymous Visitor] -->|Visits Gift category| B[AB Tasty]
     B -->|Generates anonymous ID and tracks interactions| C[AB Tasty tracking data]
     A -->|Clicks back in stock and enters email| D[CRM]
     B -->|Attaches Gift tag to email payload| D
