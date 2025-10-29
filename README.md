@@ -92,6 +92,7 @@ flowchart LR
   A5 --> B1
   S2 --> S3
   S4 --> S5
+  S5 --> S6
   C4 --> D1
   D3 --> H
   F3 --> H
