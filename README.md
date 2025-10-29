@@ -207,7 +207,7 @@ sequenceDiagram
 **Total Estimated Effort:** ~15–20 days (3–4 weeks)
 
 
-## Gantt Timeline
+## Timeline
 
 ```mermaid
 gantt
