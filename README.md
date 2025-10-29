@@ -222,14 +222,117 @@ sequenceDiagram
 Acts as the **central hub** connecting the **LVMH website**, **LVMH mobile app**, **AB Tasty and Wandz**, and **LVMH store interactions**.
 
 
-## Development Requirements such as Implementation
-- Deploy **AB Tasty web JavaScript tag** on LVMH web.  
-- Implement **product recommendation strategies** on LVMH web and email.  
-- Store **unique ID** linked to LVMH CRM email in:  
+# Development Requirements and Effort Breakdown
+
+## Overview
+This section outlines the development requirements, estimated effort, and task breakdown for implementing the omnichannel data flow between AB Tasty, CRM, web, app, and in-store systems for LVMH.
+
+---
+
+## Development Requirements
+- Deploy **AB Tasty web JavaScript tag** on web properties.  
+- Implement **product recommendation strategies** on web and email.  
+- Store **unique ID** linked to CRM email in:  
   - Web **cookie**  
-  - App **state, variable, or local storage**
-- Ensure **“Gift” category tag** and **email payload** are transmitted correctly to **LVMH CRM/Database**.  
-- Generate and maintain **unique IDs** in the **LVMH CRM/Database**.
+  - App **state, variable, or local storage**  
+- Ensure **“Gift” category tag** and **email payload** are transmitted correctly to the CRM/Database.  
+- Generate and maintain **unique IDs** in the CRM/Database.
+
+---
+
+## Task Breakdown and Estimated Effort
+
+### 1. AB Tasty Web Tag Deployment
+**Tasks:**  
+- Configure AB Tasty tag on staging and production.  
+- Validate tag firing across key pages (product, cart, category).  
+- Integrate event tracking (clicks, views, filters, back-in-stock CTA).  
+
+**Estimated Effort:** 2–3 days  
+**Dependencies:** Access to tag manager and QA environment.
+
+---
+
+### 2. Product Recommendation Strategy Setup
+**Tasks:**  
+- Configure product feed integration.  
+- Define and test “Gift” segment recommendations.  
+- Implement fallback carousel for out-of-stock items.  
+- Configure dynamic recommendations in CRM email templates.
+
+**Estimated Effort:** 3–4 days  
+**Dependencies:** Product feed, CRM templates, AB Tasty configuration.
+
+---
+
+### 3. Unique ID Management and Storage
+**Tasks:**  
+- Extend CRM API to generate and manage unique IDs.  
+- Map IDs to users via email during signup and app creation.  
+- Implement persistence via cookies and app local storage.  
+- Test ID consistency across web and app logins.
+
+**Estimated Effort:** 5–6 days  
+**Dependencies:** CRM API documentation, app and web development teams.
+
+---
+
+### 4. “Gift” Tag and Email Payload Transmission
+**Tasks:**  
+- Modify AB Tasty payloads to attach “Gift” tag.  
+- Validate tagging for all tracked events.  
+- Update CRM ingestion pipeline to recognise “Gift” segment.  
+
+**Estimated Effort:** 2 days  
+**Dependencies:** CRM endpoint and AB Tasty developer access.
+
+---
+
+### 5. CRM Synchronisation and Maintenance
+**Tasks:**  
+- Ensure CRM receives and maintains consistent user data.  
+- Implement audit logs for data transfer validation.  
+- Verify GDPR compliance for consent and EU storage.  
+
+**Estimated Effort:** 3–5 days  
+**Dependencies:** CRM vendor support, GDPR compliance review.
+
+---
+
+## Total Estimated Effort
+| Task | Estimated Effort |
+|------|------------------|
+| AB Tasty Tag Deployment | 2–3 days |
+| Product Recommendations | 3–4 days |
+| Unique ID Management | 5–6 days |
+| Gift Tag & Payload | 2 days |
+| CRM Synchronisation | 3–5 days |
+| **Total (Approx.)** | **15–20 days (3–4 weeks)** |
+
+---
+
+## Gantt Timeline (Estimated)
+
+```mermaid
+gantt
+dateFormat  YYYY-MM-DD
+title LVMH Omnichannel Implementation Timeline
+section AB Tasty Setup
+AB Tasty Tag Deployment          :active, des1, 2025-11-03, 3d
+Product Recommendation Strategy  :des2, after des1, 4d
+section CRM & Data Integration
+Unique ID Management and Storage :des3, after des2, 6d
+Gift Tag and Payload Transmission:des4, after des3, 2d
+section QA & Compliance
+CRM Synchronisation and QA       :des5, after des4, 5d
+GDPR Review and Final Checks     :des6, after des5, 3d
+```
+
+**Notes:**  
+- The Gantt chart assumes sequential delivery with minor overlaps possible for testing phases.  
+- Total duration: approximately **4–5 weeks** including QA and compliance.  
+- Team coordination between AB Tasty, CRM, and app developers is essential.  
+- Weekly checkpoints recommended for progress review and risk management.
 
 
 ## Notes
