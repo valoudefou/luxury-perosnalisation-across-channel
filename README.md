@@ -105,47 +105,57 @@ flowchart LR
 This sequence diagram follows the chronological customer journey and data exchanges between systems.
 
 ```mermaid
-%% Omnichannel Customer Journey (Sequence)
 sequenceDiagram
-    participant User
-    participant Website
-    participant AB_Tasty
-    participant CRM
-    participant Email_Svc
-    participant Mobile_App
-    participant Wandz_SDK
-    participant Store_App
+  participant User
+  participant Website
+  participant ABTasty as AB Tasty
+  participant CRM as CRM Database
+  participant Email as Email Service
+  participant App as Mobile App
+  participant Wandz as Wandz SDK
+  participant Store as Clienteling App
 
-    %% Step 1
-    User->>Website: Visits site and selects Gift
-    Website->>AB_Tasty: Generates anonymous ID and tracks interactions
-    AB_Tasty->>User: Displays product recommendations
+  %% Step 1 - Website visit
+  User->>Website: Visit site and pick Gift
+  Website->>ABTasty: Create anonymous ID
+  ABTasty-->>Website: Anonymous ID
+  User->>Website: View product
+  Website->>ABTasty: Check stock
+  ABTasty-->>Website: Out of stock
+  ABTasty->>User: Show similar products
+  ABTasty->>ABTasty: Track views clicks filters
 
-    %% Step 2
-    User->>Website: Clicks back in stock and enters email
-    Website->>AB_Tasty: Tracks action, no email stored
-    AB_Tasty->>CRM: Sends payload with email and Gift tag
+  %% Step 2 - Back in stock alert
+  User->>Website: Click back in stock alert
+  User->>Website: Submit email
+  Website->>ABTasty: Confirm action
+  note right of ABTasty: AB Tasty does not store the email
+  ABTasty->>CRM: Send email with Gift tag
 
-    %% Step 3
-    CRM->>CRM: Stores email and generates unique ID
-    CRM->>Email_Svc: Sends unavailable product update with recommendations
-    User->>Email_Svc: Clicks alternative product link
+  %% Step 3 - CRM identification and email
+  CRM->>CRM: Store email and set unique ID
+  CRM->>CRM: Add to Gift segment
+  CRM->>Email: Build unavailable notice with recs
+  Email->>User: Send email
+  User->>Email: Click recommended product
 
-    %% Step 4
-    User->>Mobile_App: Lands on app and creates account
-    Mobile_App->>CRM: Matches user via email and unique ID
-    Mobile_App->>Wandz_SDK: Sends events and segments
-    Note right of Wandz_SDK: Data stored in EU\nConsent managed per GDPR
+  %% Step 4 - Mobile app interaction
+  Email->>App: Open deep link to product
+  User->>App: Create account
+  App->>CRM: Match by email and unique ID
+  CRM-->>App: Return user ID and segment
+  Wandz->>App: Link events to unique ID
 
-    %% Step 5
-    User->>Website: Logs in later
-    Website->>AB_Tasty: Reads cookie with unique ID
-    AB_Tasty->>CRM: Syncs data for personalisation
+  %% Step 5 - Web login
+  User->>Website: Log in
+  CRM-->>Website: Unique ID via cookie
+  ABTasty->>Website: Recognise user
+  Website-->>User: Cross channel personalisation
 
-    %% Step 6
-    User->>Store_App: Identifies with QR or barcode
-    Store_App->>CRM: Retrieves profile with email, ID, segment
-    CRM->>Store_App: Sends personalised data
+  %% Step 6 - In store
+  User->>Store: Identify with QR or barcode
+  Store->>CRM: Request profile
+  CRM-->>Store: Email ID segment history
 ```
 
 ## Text Specifications
