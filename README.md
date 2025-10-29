@@ -83,7 +83,7 @@ flowchart LR
   end
 
   %% CRM hub and keys
-  H[(CRM hub)]
+  H[(CRM/Database hub)]
   class H hub
   K[Keys • Email • Unique ID • Segment Gift • QR or barcode • Account info]
   class K key
