@@ -12,7 +12,7 @@
 ## Overview
 
 This document illustrates the **Omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
-It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect to deliver a consistent, GDPR-compliant experience.
+It highlights how AB Tasty, CRM systems, Web, the mobile app and clienteling connect to deliver a consistent, GDPR-compliant experience.
 
 
 ## Flowchart – Data Flow Between Systems
@@ -91,6 +91,12 @@ flowchart LR
     F3[System fetches email • ID • segment • history]
     F1 --> F2 --> F3
   end
+
+  %% CRM hub and keys
+  H[(CRM hub)]
+  class H hub
+  K[Keys • Email • Unique ID • Segment Gift • QR or barcode • Account info]
+  class K key
 
   %% Main flows
   A5 --> B1
