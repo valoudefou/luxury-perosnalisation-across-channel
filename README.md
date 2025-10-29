@@ -1,4 +1,4 @@
-# LVMH – Omnichannel Customer Journey and Data Flow
+# Omnichannel Customer Journey and Data Flow
 
 [![Made by AB Tasty](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-AB%20Tasty-red.svg)](https://www.abtasty.com)
 [![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-green.svg)](#)
@@ -15,7 +15,7 @@
 
 ## Overview
 
-This document illustrates the **LVMH omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
+This document illustrates the **Omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
 It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect to deliver a consistent, GDPR-compliant experience.
 
 
@@ -24,7 +24,7 @@ It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect 
 The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
-%% LVMH - Omnichannel Customer Journey (Flowchart)
+%% Omnichannel Customer Journey (Flowchart)
 flowchart TD
     A[Website Visitor] -->|Visits Gift category| B[AB Tasty]
     B -->|Generates anonymous ID and tracks interactions| C[AB Tasty tracking data]
@@ -56,7 +56,7 @@ flowchart TD
 This sequence diagram follows the chronological customer journey and data exchanges between systems.
 
 ```mermaid
-%% LVMH - Omnichannel Customer Journey (Sequence)
+%% Omnichannel Customer Journey (Sequence)
 sequenceDiagram
     participant User
     participant Website
