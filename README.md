@@ -51,7 +51,7 @@ flowchart LR
   subgraph S3[Step 3 • CRM identification and email]
     C1[CRM/Database stores email • sets unique ID]
     C2[User in Gift segment]
-    C3[CRM Email Product still unavailable AB Tasty Email recs from Step1]
+    C3[CRM Email Product still unavailable with AB Tasty recs from Step1]
     C4[User clicks a recommended Product from Email]
     C1 --> C2 --> C3 --> C4
   end
