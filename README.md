@@ -1,6 +1,6 @@
 # Omnichannel Customer Journey and Data Flow
 
-[![Made by AB Tasty](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-AB%20Tasty-red.svg)](https://www.abtasty.com)
+[![AB Tasty](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-AB%20Tasty-red.svg)](https://www.abtasty.com)
 [![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-green.svg)](#)
 [![Mermaid Diagrams](https://img.shields.io/badge/Visualised%20with-Mermaid-blue.svg)](https://mermaid.js.org)
 
