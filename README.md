@@ -1,3 +1,4 @@
+%% LVMH - Omnichannel Customer Journey (Flowchart)
 flowchart TD
     A[Website Visitor] -->|Visits Gift Category| B[AB Tasty]
     B -->|Generates Anonymous ID<br>Tracks interactions| C[AB Tasty Tracking Data]
