@@ -20,26 +20,93 @@ It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect 
 The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
-%% Simplified Omnichannel Customer Journey
-flowchart TD
-    A[Website visitor] -->|Visit Gift category| B[AB Tasty]
-    B -->|Create anonymous id and track| C[Tracking data]
-    A -->|Back in stock request Gift tag| D[CRM]
-    D -->|Store email and create id| E[CRM database]
-    D -->|Send email with recommendations| F[User inbox]
-    F -->|Click product link| G[Mobile app]
-    G -->|Create account and sync| E
-    G -->|Send app events| H[Wandz SDK]
-    E -->|Store id and Gift segment| I[CRM hub]
-    I -->|Sync id cookie| J[Web login]
-    J -->|Recognise and personalise| B
-    I -->|Share profile to store app| K[In store app]
-    K -->|Identify with QR or barcode| I
+flowchart LR
+  classDef hub fill:#eef,stroke:#77a,stroke-width:1px;
+  classDef gdpr fill:#efe,stroke:#7a7,stroke-width:1px;
+  classDef key fill:#ffe,stroke:#aa7,stroke-width:1px;
 
-    subgraph GDPR compliance
-        note1[Data stored in EU]
-        note2[Consent managed under GDPR]
-    end
+  %% Step 1 - Website visit
+  subgraph S1[Step 1 • Website visit]
+    A1[User visits site • selects Gift]
+    A2[AB Tasty creates anon ID]
+    A3[User views product]
+    A4{Out of stock?}
+    A5[Show similar products carousel]
+    A6[Track views • clicks • filters]
+    A1 --> A2 --> A3 --> A4
+    A4 -- Yes --> A5 --> A6
+    A4 -- No --> A6
+  end
+
+  %% Step 2 - Back in stock alert
+  subgraph S2[Step 2 • Back in stock alert]
+    B1[User ignores recs]
+    B2[Clicks back in stock alert]
+    B3[Enters email]
+    B4[AB Tasty logs confirmation only]
+    B5[Attach Gift tag to email payload]
+    B1 --> B2 --> B3 --> B4 --> B5
+  end
+
+  %% Step 3 - CRM identification and email
+  subgraph S3[Step 3 • CRM identification and email]
+    C1[CRM stores email • sets unique ID]
+    C2[User in Gift segment]
+    C3[Later email • product still unavailable + recs]
+    C4[User clicks a recommended link]
+    C1 --> C2 --> C3 --> C4
+  end
+
+  %% Step 4 - Mobile app interaction
+  subgraph S4[Step 4 • Mobile app interaction]
+    D1[User lands in mobile app]
+    D2[Creates account]
+    D3[Match via email + unique ID]
+    D4[Wandz SDK links events to unique ID]
+    D1 --> D2 --> D3 --> D4
+  end
+
+  %% GDPR notes
+  subgraph G[GDPR]
+    direction TB
+    G1[Data stored in EU]
+    G2[Consent managed]
+    G3[Legal clauses in contract]
+  end
+  class G,G1,G2,G3 gdpr
+
+  %% Step 5 - Web login
+  subgraph S5[Step 5 • Web login]
+    E1[User logs in on website]
+    E2[AB Tasty recognises user]
+    E3[CRM unique ID available via cookie]
+    E4[Cross channel personalisation]
+    E1 --> E2 --> E3 --> E4
+  end
+
+  %% Step 6 - In store
+  subgraph S6[Step 6 • In store]
+    F1[User visits store • clienteling app]
+    F2[Identifies via QR or barcode]
+    F3[System fetches email • ID • segment • history]
+    F1 --> F2 --> F3
+  end
+
+  %% CRM hub and keys
+  H[(CRM hub)]
+  class H hub
+  K[Keys • Email • Unique ID • Segment Gift • QR or barcode • Account info]
+  class K key
+
+  %% Main flows
+  A5 --> B1
+  B5 --> C1
+  C4 --> D1
+  D3 --> H
+  E3 --> H
+  F3 --> H
+  H --- K
+  G --- H
 ```
 
 
