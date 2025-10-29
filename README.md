@@ -99,7 +99,7 @@ sequenceDiagram
     CRM->>Store_App: Sends personalised data
 ```
 
-# LVMH – Omnichannel Customer Journey and Data Flow (Clean Version)
+## Text Specifications
 
 ## Step 1 – Website Visit and Product Interaction
 - An anonymous user visits the website and selects the **Gift** category.  
@@ -108,7 +108,6 @@ sequenceDiagram
 - AB Tasty displays a **carousel of similar products** (same category, similar price, tagged “gift”).  
 - All user interactions (**page views, clicks, filters**) are tracked by AB Tasty.
 
----
 
 ## Step 2 – Back-in-Stock Alert
 - The user ignores recommendations.  
@@ -118,7 +117,6 @@ sequenceDiagram
 **Technical detail:**  
 - AB Tasty attaches the **“Gift” segment tag** to the email payload before sending to CRM.
 
----
 
 ## Step 3 – CRM Identification and Email Trigger
 - The **CRM** stores the submitted email and assigns a **unique ID** to the user.  
@@ -127,7 +125,6 @@ sequenceDiagram
 - The email includes **AB Tasty product recommendations** (similar to Step 1).  
 - The user clicks a **recommended product link** in the email.
 
----
 
 ## Step 4 – Mobile App Interaction
 - The user lands in the **mobile app** after clicking the email link.  
@@ -142,21 +139,21 @@ sequenceDiagram
 - User **consent** managed per GDPR.  
 - Legal **clauses** defined in client contract.
 
----
+
 
 ## Step 5 – Web Login
 - When the user logs in on the website, **AB Tasty recognises** them.  
 - The **unique ID** from the CRM is made available via a **cookie**.  
 - Enables **cross-channel personalisation** between web and app.
 
----
+
 
 ## Step 6 – In-Store Interaction
 - The user visits a **physical store** using a **clienteling app** connected to the CRM.  
 - They identify themselves using a **QR code or barcode**.  
 - The system retrieves their **email, ID, segment, and history**.
 
----
+
 
 ## Database and CRM Implications
 **Key identifiers across all systems:**
@@ -169,7 +166,7 @@ sequenceDiagram
 **CRM role:**  
 Acts as the **central hub** connecting the **website**, **mobile app**, **AB Tasty/Wandz**, and **store interactions**.
 
----
+
 
 ## Development Requirements (LVMH Implementation)
 - Deploy **AB Tasty web JavaScript tag**.  
