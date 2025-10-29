@@ -173,7 +173,7 @@ sequenceDiagram
 
 ## Notes
 
-- **AB Tasty:** Tracking, recommendations, ID sync.  
+- **AB Tasty:** Tracking, personalisation, recommendations, ID sync.  
 - **CRM:** Central data and segmentation hub.  
 - **Wandz SDK:** Collects event and creates AI predictive segmentations.  
 
