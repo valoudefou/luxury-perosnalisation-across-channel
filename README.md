@@ -221,13 +221,18 @@ sequenceDiagram
 **LVMH CRM/Database role:**  
 Acts as the **central hub** connecting the **LVMH website**, **LVMH mobile app**, **AB Tasty and Wandz**, and **LVMH store interactions**.
 
+## Notes
+- **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
+- **LVMH CRM/Database** is the central hub connecting website, app and store.  
+- **Wandz SDK** gathers in-app events and segments for personalisation.  
+- **GDPR compliance** ensures data remains within the EU with explicit consent management.
 
-# Development Requirements and Effort Breakdown
+## Development Requirements and Effort Breakdown
 
 ## Overview
 This section outlines the development requirements, estimated effort, and task breakdown for implementing the omnichannel data flow between AB Tasty, CRM, web, app, and in-store systems for LVMH.
 
----
+
 
 ## Development Requirements
 - Deploy **AB Tasty web JavaScript tag** on web properties.  
@@ -238,7 +243,7 @@ This section outlines the development requirements, estimated effort, and task b
 - Ensure **“Gift” category tag** and **email payload** are transmitted correctly to the CRM/Database.  
 - Generate and maintain **unique IDs** in the CRM/Database.
 
----
+
 
 ## Task Breakdown and Estimated Effort
 
@@ -251,7 +256,7 @@ This section outlines the development requirements, estimated effort, and task b
 **Estimated Effort:** 2–3 days  
 **Dependencies:** Access to tag manager and QA environment.
 
----
+
 
 ### 2. Product Recommendation Strategy Setup
 **Tasks:**  
@@ -263,7 +268,7 @@ This section outlines the development requirements, estimated effort, and task b
 **Estimated Effort:** 3–4 days  
 **Dependencies:** Product feed, CRM templates, AB Tasty configuration.
 
----
+
 
 ### 3. Unique ID Management and Storage
 **Tasks:**  
@@ -275,7 +280,7 @@ This section outlines the development requirements, estimated effort, and task b
 **Estimated Effort:** 5–6 days  
 **Dependencies:** CRM API documentation, app and web development teams.
 
----
+
 
 ### 4. “Gift” Tag and Email Payload Transmission
 **Tasks:**  
@@ -286,7 +291,7 @@ This section outlines the development requirements, estimated effort, and task b
 **Estimated Effort:** 2 days  
 **Dependencies:** CRM endpoint and AB Tasty developer access.
 
----
+
 
 ### 5. CRM Synchronisation and Maintenance
 **Tasks:**  
@@ -297,7 +302,7 @@ This section outlines the development requirements, estimated effort, and task b
 **Estimated Effort:** 3–5 days  
 **Dependencies:** CRM vendor support, GDPR compliance review.
 
----
+
 
 ## Total Estimated Effort
 | Task | Estimated Effort |
@@ -309,7 +314,7 @@ This section outlines the development requirements, estimated effort, and task b
 | CRM Synchronisation | 3–5 days |
 | **Total (Approx.)** | **15–20 days (3–4 weeks)** |
 
----
+
 
 ## Gantt Timeline (Estimated)
 
@@ -335,9 +340,5 @@ GDPR Review and Final Checks     :des6, after des5, 3d
 - Weekly checkpoints recommended for progress review and risk management.
 
 
-## Notes
-- **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
-- **LVMH CRM/Database** is the central hub connecting website, app and store.  
-- **Wandz SDK** gathers in-app events and segments for personalisation.  
-- **GDPR compliance** ensures data remains within the EU with explicit consent management.
+
 
