@@ -43,16 +43,16 @@ flowchart LR
     B1[User ignores recs]
     B2[Clicks back in stock alert]
     B3[Submits email]
-    B4[Attach Gift tag to email payload]
+    B4[Gift tag attached to email payload]
     B1 --> B2 --> B3 --> B4
   end
 
   %% Step 3 - CRM identification and email
   subgraph S3[Step 3 • CRM identification and email]
-    C1[CRM stores email • sets unique ID]
+    C1[CRM/Database stores email • sets unique ID]
     C2[User in Gift segment]
     C3[Later email is sent from CRM • Sorry product still unavailable with AB Tasty Email product recs]
-    C4[User clicks a recommended Product in Email]
+    C4[User clicks a recommended Product from Email]
     C1 --> C2 --> C3 --> C4
   end
 
@@ -69,10 +69,9 @@ flowchart LR
   %% Step 5 - Web login
   subgraph S5[Step 5 • Web login]
     E1[User logs back on Web]
-    E2[AB Tasty recognises user via unique ID]
-    E3[CRM unique ID available to AB Tasty via cookie]
+    E2[AB Tasty recognises logged in user via unique ID in cookie]
     E4[Cross channel personalisation achieved]
-    E1 --> E2 --> E3 --> E4
+    E1 --> E2 --> E3
   end
 
   %% Step 6 - In store
@@ -92,6 +91,7 @@ flowchart LR
   %% Main flows
   A5 --> B1
   S2 --> S3
+  S4 --> S5
   C4 --> D1
   D3 --> H
   E3 --> H
