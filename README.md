@@ -51,7 +51,7 @@ flowchart LR
   subgraph S3[Step 3 • CRM identification and email]
     C1[CRM stores email • sets unique ID]
     C2[User in Gift segment]
-    C3[Later email is sent from CRM • Sorry product still unavailable • Email from AB with AB Tasty product recs]
+    C3[Later email is sent from CRM • Sorry product still unavailable with AB Tasty Email product recs]
     C4[User clicks a recommended Product in Email]
     C1 --> C2 --> C3 --> C4
   end
@@ -91,7 +91,7 @@ flowchart LR
 
   %% Main flows
   A5 --> B1
-  B5 --> C1
+  S2 --> S3
   C4 --> D1
   D3 --> H
   E3 --> H
