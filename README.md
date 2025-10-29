@@ -24,7 +24,7 @@ The diagram below shows how user data travels across systems from the website vi
 flowchart TD
     A[Web Anonymous Visitor] -->|Visits Gift category| B[AB Tasty]
     B -->|Generates anonymous ID and tracks interactions| C[AB Tasty tracking data]
-    A -->|Clicks back in stock and enters email Gift attached to payload| D[CRM]
+    A -->|Clicks back in stock and sends email - Gift tag attached to payload| D[CRM]
     D -->|Stores email and creates unique ID| E[CRM database]
     D -->|Sends email with product recommendations| A2[User inbox]
     A2 -->|Clicks recommended product link| F[Mobile app]
