@@ -20,28 +20,25 @@ It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect 
 The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
-%% Omnichannel Customer Journey (Flowchart)
+%% Simplified Omnichannel Customer Journey (Flowchart)
 flowchart TD
-    A[Web Anonymous Visitor] -->|Visits Gift category| B[AB Tasty]
-    B -->|Generates anonymous ID and tracks interactions| C[AB Tasty tracking data]
-    A -->|Clicks back in stock and sends email - Gift tag attached to payload| D[CRM]
-    D -->|Stores email and creates unique ID| E[CRM database]
-    D -->|Sends email with product recommendations| A2[User inbox]
-    A2 -->|Clicks recommended product link| F[Mobile app]
-    F -->|User creates account| G[App database]
-    G -->|Matches via email and unique ID| E
-    G -->|Sends user events and segments| H[Wandz SDK]
-    E -->|Stores unique ID and Gift segment| I[CRM hub]
-    I -->|Syncs unique ID cookie| J[Website login]
-    J -->|Recognises user and personalises| B
-    I -->|Shares user data and segment| K[In-store clienteling app]
-    K -->|User identifies with QR or barcode| L[In-store interaction]
-    L -->|Retrieves email, ID and segment| I
+    A[Website Visitor] -->|Visits Gift category| B[AB Tasty]
+    B -->|Generates anonymous ID & tracks behaviour| C[AB Tasty Data]
+    A -->|Requests back-in-stock alert (Gift tag)| D[CRM]
+    D -->|Stores email & creates unique ID| E[CRM Database]
+    D -->|Sends product recommendation email| F[User Inbox]
+    F -->|Clicks alternative product link| G[Mobile App]
+    G -->|Creates account & syncs with CRM| E
+    G -->|Sends app events| H[Wandz SDK]
+    E -->|Stores Gift segment & unique ID| I[CRM Hub]
+    I -->|Syncs ID to website (cookie)| J[Web Login]
+    J -->|Recognises user & personalises| B
+    I -->|Shares user data with store app| K[In-Store App]
+    K -->|User identified by QR/barcode| I
 
-    subgraph GDPR compliance
-        note1[All data stored in EU]
+    subgraph GDPR Compliance
+        note1[Data stored in EU]
         note2[Consent managed per GDPR]
-        note3[Clauses defined in client contract]
     end
 ```
 
