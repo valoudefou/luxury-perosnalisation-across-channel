@@ -11,7 +11,7 @@
 ## Overview
 
 This document illustrates the **LVMH omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
-It highlights how **AB Tasty**, **LVMH CRM systems**, **LVMH Web**, the **LVMH mobile app** and **LVMH clienteling** connect to deliver a consistent, GDPR-compliant experience.
+It highlights how **AB Tasty**, **CRM/Database from LVMH**, **Web**, the **LVMH mobile app** and **clienteling instore app** connect to deliver a consistent, GDPR-compliant experience.
 
 
 ## Flowchart - Data Flow Between Systems
@@ -46,20 +46,20 @@ flowchart LR
     B1 --> B2 --> B3 --> B4
   end
 
-  %% Step 3 - LVMH CRM identification and email
-  subgraph S3[Step 3 • LVMH CRM identification and email]
-    C1[LVMH CRM or Customer Database stores email • sets unique ID]
+  %% Step 3 - CRM/Database identification and email
+  subgraph S3[Step 3 • LVMH CRM/Database identification and email]
+    C1[CRM/Database or Customer Database stores email • sets unique ID]
     C2[User in Gift segment]
-    C3[LVMH CRM Email Product still unavailable with AB Tasty recs from Step1]
+    C3[CRM Email Product still unavailable with AB Tasty recs from Step1]
     C4[User clicks a recommended Product from Email]
     C1 --> C2 --> C3 --> C4
   end
 
   %% Step 4 - LVMH Mobile app interaction
   subgraph S4[Step 4 • LVMH mobile app interaction]
-    D1[User lands in LVMH mobile app]
+    D1[User lands in mobile app]
     D2[Creates account]
-    D3[Match email in LVMH CRM or Database]
+    D3[Match email in LVMH CRM/Database]
     D4[Unique ID available on app account]
     D5[Wandz SDK links events to unique ID]
     D1 --> D2 --> D3 --> D4 --> D5
@@ -218,23 +218,23 @@ sequenceDiagram
 - QR code or barcode  
 - Account information  
 
-**LVMH CRM role:**  
+**LVMH CRM/Database role:**  
 Acts as the **central hub** connecting the **LVMH website**, **LVMH mobile app**, **AB Tasty and Wandz**, and **LVMH store interactions**.
 
 
 ## Development Requirements such as Implementation
-- Deploy **AB Tasty web JavaScript tag** on LVMH properties.  
+- Deploy **AB Tasty web JavaScript tag** on LVMH web.  
 - Implement **product recommendation strategies** on LVMH web and email.  
 - Store **unique ID** linked to LVMH CRM email in:  
   - Web **cookie**  
-  - App **state, variable, or local storage**  
-- Ensure **“Gift” category tag** and **email payload** are transmitted correctly to **LVMH CRM**.  
-- Generate and maintain **unique IDs** in the **LVMH CRM**.
+  - App **state, variable, or local storage**
+- Ensure **“Gift” category tag** and **email payload** are transmitted correctly to **LVMH CRM/Database**.  
+- Generate and maintain **unique IDs** in the **LVMH CRM/Database**.
 
 
 ## Notes
 - **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
-- **LVMH CRM** is the central hub connecting website, app and store.  
+- **LVMH CRM/Database** is the central hub connecting website, app and store.  
 - **Wandz SDK** gathers in-app events and segments for personalisation.  
 - **GDPR compliance** ensures data remains within the EU with explicit consent management.
 
