@@ -17,37 +17,111 @@
 
 ## Overview
 
-This documentation outlines the **end-to-end customer journey and data flow** across LVMH’s digital and physical environments.  
-It highlights how AB Tasty, CRM systems, the mobile app and in-store clienteling connect to create a unified, GDPR-compliant experience.
+This document illustrates the **LVMH omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
+It highlights how AB Tasty, CRM systems, the mobile app and clienteling connect to deliver a consistent, GDPR-compliant experience.
 
 ---
 
 ## Flowchart – Data Flow Between Systems
 
-The diagram below visualises how data moves across touchpoints, from **website visit** to **in-store interaction**, with GDPR controls included.
+The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
 %% LVMH - Omnichannel Customer Journey (Flowchart)
 flowchart TD
-    A[Website Visitor] -->|Visits Gift Category| B[AB Tasty]
-    B -->|Generates Anonymous ID<br>Tracks interactions| C[AB Tasty Tracking Data]
-    A -->|Clicks "Back in Stock" + Enters Email| D[CRM]
-    B -->|Attaches "Gift" tag to email payload| D
-    D -->|Stores Email + Creates Unique ID| E[CRM Database]
-    D -->|Sends Email with Product Recommendations| A2[User Email Inbox]
-    A2 -->|Clicks Recommended Product Link| F[Mobile App]
-    F -->|User Creates Account| G[App Database]
-    G -->|Matches via Email + Unique ID| E
-    G -->|Sends User Events + Segments| H[Wandz SDK]
-    E -->|Stores Unique ID + Gift Segment| I[CRM Hub]
-    I -->|Syncs Unique ID Cookie| J[Website Login]
-    J -->|Recognises User + Personalises| B
-    I -->|Shares User Data + Segment| K[In-Store Clienteling App]
-    K -->|User Identifies with QR/Barcode| L[In-Store Interaction]
-    L -->|Retrieves Email + ID + Segment| I
+    A[Website Visitor] -->|Visits Gift category| B[AB Tasty]
+    B -->|Generates anonymous ID and tracks interactions| C[AB Tasty tracking data]
+    A -->|Clicks back in stock and enters email| D[CRM]
+    B -->|Attaches Gift tag to email payload| D
+    D -->|Stores email and creates unique ID| E[CRM database]
+    D -->|Sends email with product recommendations| A2[User inbox]
+    A2 -->|Clicks recommended product link| F[Mobile app]
+    F -->|User creates account| G[App database]
+    G -->|Matches via email and unique ID| E
+    G -->|Sends user events and segments| H[Wandz SDK]
+    E -->|Stores unique ID and Gift segment| I[CRM hub]
+    I -->|Syncs unique ID cookie| J[Website login]
+    J -->|Recognises user and personalises| B
+    I -->|Shares user data and segment| K[In-store clienteling app]
+    K -->|User identifies with QR or barcode| L[In-store interaction]
+    L -->|Retrieves email, ID and segment| I
 
-    subgraph GDPR_Compliance
+    subgraph GDPR compliance
         note1[All data stored in EU]
         note2[Consent managed per GDPR]
         note3[Clauses defined in client contract]
     end
+```
+
+---
+
+## Sequence Diagram – Customer Journey Timeline
+
+This sequence diagram follows the chronological customer journey and data exchanges between systems.
+
+```mermaid
+%% LVMH - Omnichannel Customer Journey (Sequence)
+sequenceDiagram
+    participant User
+    participant Website
+    participant AB_Tasty
+    participant CRM
+    participant Email_Svc
+    participant Mobile_App
+    participant Wandz_SDK
+    participant Store_App
+
+    %% Step 1
+    User->>Website: Visits site and selects Gift
+    Website->>AB_Tasty: Generates anonymous ID and tracks interactions
+    AB_Tasty->>User: Displays product recommendations
+
+    %% Step 2
+    User->>Website: Clicks back in stock and enters email
+    Website->>AB_Tasty: Tracks action, no email stored
+    AB_Tasty->>CRM: Sends payload with email and Gift tag
+
+    %% Step 3
+    CRM->>CRM: Stores email and generates unique ID
+    CRM->>Email_Svc: Sends unavailable product update with recommendations
+    User->>Email_Svc: Clicks alternative product link
+
+    %% Step 4
+    User->>Mobile_App: Lands on app and creates account
+    Mobile_App->>CRM: Matches user via email and unique ID
+    Mobile_App->>Wandz_SDK: Sends events and segments
+    Note right of Wandz_SDK: Data stored in EU\nConsent managed per GDPR
+
+    %% Step 5
+    User->>Website: Logs in later
+    Website->>AB_Tasty: Reads cookie with unique ID
+    AB_Tasty->>CRM: Syncs data for personalisation
+
+    %% Step 6
+    User->>Store_App: Identifies with QR or barcode
+    Store_App->>CRM: Retrieves profile with email, ID, segment
+    CRM->>Store_App: Sends personalised data
+```
+
+---
+
+## Notes
+- **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
+- **CRM** is the central hub connecting website, app and store.  
+- **Wandz SDK** gathers in-app events and segments for personalisation.  
+- **GDPR compliance** ensures data remains within the EU with explicit consent management.
+
+---
+
+## How to View Locally
+
+To render these Mermaid diagrams locally:
+
+1. Open the repository in **VS Code**.  
+2. Install the extension **Markdown Preview Enhanced** or **Mermaid Markdown Preview**.  
+3. Open `README.md` and press **Ctrl + Shift + V** (Windows/Linux) or **Cmd + Shift + V** (macOS).  
+4. The diagrams will render automatically.
+
+---
+
+💡 *Maintained by AB Tasty AI — internal visualisation and architecture documentation.*
