@@ -92,12 +92,6 @@ flowchart LR
     F1 --> F2 --> F3
   end
 
-  %% CRM hub and keys
-  H[(CRM hub)]
-  class H hub
-  K[Keys • Email • Unique ID • Segment Gift • QR or barcode • Account info]
-  class K key
-
   %% Main flows
   A5 --> B1
   B5 --> C1
