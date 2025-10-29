@@ -1,22 +1,23 @@
 # LVMH Omnichannel Customer Journey and Data Flow
 
-
 ## Table of Contents
 1. [Overview](#overview)
 2. [Flowchart - Data Flow Between Systems](#flowchart---data-flow-between-systems)
 3. [Sequence Diagram - Customer Journey Timeline](#sequence-diagram---customer-journey-timeline)
-4. [Notes](#notes)
+4. [Detailed Steps](#detailed-steps)
+5. [Database and CRM Implications](#database-and-crm-implications)
+6. [Notes](#notes)
+7. [Development Requirements and Effort Breakdown](#development-requirements-and-effort-breakdown)
+8. [Gantt Timeline](#gantt-timeline)
 
 
 ## Overview
 
-This document illustrates the **LVMH omnichannel customer journey** and **data flow** across digital and in-store touchpoints.  
-It highlights how **AB Tasty**, **CRM/Database from LVMH**, **Web**, the **LVMH mobile app** and **clienteling instore app** connect to deliver a consistent, GDPR-compliant experience.
+This document outlines the **LVMH omnichannel customer journey** and associated **data flow** across digital and in-store systems.  
+It demonstrates how **AB Tasty**, **LVMH CRM**, **website**, **mobile app**, and **clienteling app** integrate to deliver a unified, GDPR-compliant experience.
 
 
 ## Flowchart - Data Flow Between Systems
-
-The diagram below shows how user data travels across systems from the website visit to the in-store experience.
 
 ```mermaid
 flowchart LR
@@ -24,75 +25,67 @@ flowchart LR
   classDef gdpr fill:#efe,stroke:#7a7,stroke-width:1px;
   classDef key fill:#ffe,stroke:#aa7,stroke-width:1px;
 
-  %% Step 1 - LVMH Website visit
   subgraph S1[Step 1 • LVMH Website visit]
-    A1[Anonymous User visit Gift category on LVMH site]
+    A1[Anonymous User visits Gift category on LVMH site]
     A2[AB Tasty creates anonymous ID]
     A3[User views product]
     A4{Out of stock?}
-    A5[AB Tasty show similar products carousel]
+    A5[AB Tasty shows similar products]
     A6[Track views • clicks • filters]
     A1 --> A2 --> A3 --> A4
     A4 -- Yes --> A5 --> A6
     A4 -- No --> A6
   end
 
-  %% Step 2 - Back in stock alert
-  subgraph S2[Step 2 • Back in stock alert on LVMH Website]
-    B1[User ignores recs]
+  subgraph S2[Step 2 • Back in stock alert]
+    B1[User ignores recommendations]
     B2[Clicks back in stock alert]
     B3[Submits email]
     B4[Gift tag attached to email payload]
     B1 --> B2 --> B3 --> B4
   end
 
-  %% Step 3 - CRM/Database identification and email
-  subgraph S3[Step 3 • LVMH CRM/Database identification and email]
-    C1[CRM/Database or Customer Database stores email • sets unique ID]
-    C2[User in Gift segment]
-    C3[CRM Email Product still unavailable with AB Tasty recs from Step1]
-    C4[User clicks a recommended Product from Email]
+  subgraph S3[Step 3 • CRM Identification]
+    C1[CRM stores email • sets unique ID]
+    C2[User added to Gift segment]
+    C3[CRM Email built with AB Tasty recs]
+    C4[User clicks recommended Product]
     C1 --> C2 --> C3 --> C4
   end
 
-  %% Step 4 - LVMH Mobile app interaction
-  subgraph S4[Step 4 • LVMH mobile app interaction]
-    D1[User lands in mobile app]
+  subgraph S4[Step 4 • Mobile App Interaction]
+    D1[User lands in app]
     D2[Creates account]
-    D3[Match email in LVMH CRM/Database]
-    D4[Unique ID available on app account]
-    D5[Wandz SDK links events to unique ID]
+    D3[CRM matches email]
+    D4[Unique ID linked]
+    D5[Wandz SDK links events]
     D1 --> D2 --> D3 --> D4 --> D5
   end
 
-  %% Step 5 - LVMH Web login
-  subgraph S5[Step 5 • LVMH Web login]
-    E1[User logs back on LVMH Web]
-    E2[AB Tasty recognises logged in user via unique ID in cookie]
-    E3[Cross channel personalisation achieved]
+  subgraph S5[Step 5 • Web Login]
+    E1[User logs back in]
+    E2[AB Tasty recognises user via cookie]
+    E3[Cross-channel personalisation]
     E1 --> E2 --> E3
   end
 
-  %% Step 6 - LVMH In store
-  subgraph S6[Step 6 • LVMH in store]
-    F1[User visits store • LVMH clienteling app]
-    F2[Identifies via QR or barcode]
-    F3[System fetches email • ID • segment • history]
+  subgraph S6[Step 6 • In-store Interaction]
+    F1[User visits store]
+    F2[Identifies via QR/barcode]
+    F3[System fetches profile]
     F1 --> F2 --> F3
   end
 
-  %% LVMH CRM hub and keys
-  H[(LVMH CRM or Customer Database hub)]
+  H[(LVMH CRM Hub)]
   class H hub
-  K[Keys • Email • Unique ID • Segment Gift • QR or barcode • Account info]
+  K[Keys • Email • Unique ID • Segment • QR code]
   class K key
 
-  %% Main flows
   A5 --> B1
   S2 --> S3
+  C4 --> D1
   S4 --> S5
   S5 --> S6
-  C4 --> D1
   D3 --> H
   F3 --> H
   H --- K
@@ -101,244 +94,137 @@ flowchart LR
 
 ## Sequence Diagram - Customer Journey Timeline
 
-This sequence diagram follows the chronological customer journey and data exchanges between systems.
-
 ```mermaid
 sequenceDiagram
   participant User
   participant Website as LVMH Website
   participant ABTasty as AB Tasty
-  participant CRM as LVMH CRM or Customer Database
+  participant CRM as LVMH CRM
   participant Email as LVMH Email Service
   participant App as LVMH Mobile App
   participant Wandz as Wandz SDK
-  participant Store as LVMH Clienteling App
+  participant Store as Clienteling App
 
-  %% Step 1 - LVMH Website visit
-  User->>Website: Visit site and pick Gift
+  User->>Website: Visit site and select Gift
   Website->>ABTasty: Create anonymous ID
-  ABTasty-->>Website: Anonymous ID
-  User->>Website: View product
-  Website->>ABTasty: Check stock
-  ABTasty-->>Website: Out of stock
+  ABTasty-->>Website: Return ID
+  User->>Website: View product (out of stock)
   ABTasty->>User: Show similar products
-  ABTasty->>ABTasty: Track views clicks filters
-
-  %% Step 2 - Back in stock alert
-  User->>Website: Click back in stock alert
-  User->>Website: Submit email
+  User->>Website: Request back-in-stock alert
   Website->>ABTasty: Confirm action
-  note right of ABTasty: AB Tasty does not store the email
-  ABTasty->>CRM: Send email with Gift tag
+  ABTasty->>CRM: Send tagged email
 
-  %% Step 3 - LVMH CRM identification and email
-  CRM->>CRM: Store email and set unique ID
-  CRM->>CRM: Add to Gift segment
-  CRM->>Email: Build unavailable notice with recs
-  Email->>User: Send email
-  User->>Email: Click recommended product
+  CRM->>CRM: Store email + assign ID
+  CRM->>Email: Build email with AB Tasty recs
+  Email->>User: Send message
+  User->>App: Clicks deep link
+  App->>CRM: Match via email + ID
+  CRM-->>App: Return segment
+  Wandz->>App: Link events
 
-  %% Step 4 - LVMH Mobile app interaction
-  Email->>App: Open deep link to product
-  User->>App: Create account
-  App->>CRM: Match by email and unique ID
-  CRM-->>App: Return user ID and segment
-  Wandz->>App: Link events to unique ID
-
-  %% Step 5 - LVMH Web login
   User->>Website: Log in
-  CRM-->>Website: Unique ID via cookie
+  CRM-->>Website: Send cookie ID
   ABTasty->>Website: Recognise user
-  Website-->>User: Cross channel personalisation
+  Website-->>User: Show personalised content
 
-  %% Step 6 - LVMH In store
-  User->>Store: Identify with QR or barcode
-  Store->>CRM: Request profile
-  CRM-->>Store: Email ID segment history
+  User->>Store: Identify via QR
+  Store->>CRM: Fetch profile
+  CRM-->>Store: Return data
 ```
 
-## Text Specifications
 
-## Step 1 - LVMH Website Visit and Product Interaction
-- An anonymous user visits the **LVMH website** and selects the **Gift** category.  
-- AB Tasty generates an **anonymous ID** for the user.  
-- The user applies filters and views an **out-of-stock product**.  
-- AB Tasty displays a **carousel of similar products** on the LVMH site.  
-- All user interactions (**page views, clicks, filters**) are tracked by AB Tasty.
+## Detailed Steps
 
+### Step 1 • Website Visit
+- Anonymous visit on Gift category.  
+- AB Tasty creates anonymous ID.  
+- Tracks product views, clicks, filters.  
+- Shows recommendations if product is unavailable.
 
-## Step 2 - Back-in-Stock Alert on LVMH Website
-- The user ignores recommendations.  
-- They click **“Send me an alert when back in stock”** and enter their email.  
-- AB Tasty tracks the confirmation action but **does not store the email** for GDPR compliance.  
+### Step 2 • Back-in-Stock Alert
+- User requests email alert.  
+- AB Tasty attaches “Gift” tag.  
+- CRM receives email and tag, not AB Tasty (GDPR).
 
-**Technical detail:**  
-- AB Tasty attaches the **“Gift” segment tag** to the email payload before sending to **LVMH CRM**.
+### Step 3 • CRM Identification
+- CRM creates unique ID and segments user.  
+- Sends follow-up email with product recommendations.
 
+### Step 4 • Mobile App
+- User opens email link in the LVMH app.  
+- App matches email + ID with CRM.  
+- Wandz SDK tracks behaviour linked to ID.  
+- GDPR enforced (consent, EU data storage).
 
-## Step 3 - LVMH CRM Identification and Email Trigger
-- The **LVMH CRM** stores the submitted email and assigns a **unique ID** to the user.  
-- The user is categorised in the **“Gift” segment**.  
-- Later, the LVMH CRM sends an **email notification** that the product is still unavailable.  
-- The email includes **AB Tasty product recommendations**.  
-- The user clicks a **recommended product link** in the email.
+### Step 5 • Web Login
+- Returning user logs in.  
+- Cookie from CRM identifies user.  
+- AB Tasty syncs profile for cross-channel personalisation.
 
-
-## Step 4 - LVMH Mobile App Interaction
-- The user lands in the **LVMH mobile app** after clicking the email link.  
-- They **create an account** in the app.  
-- The app and LVMH CRM **match the user** using:  
-  - The **email** from Step 2.  
-  - The **unique ID** from Step 3, attached through state, variable, or local storage.  
-- The **Wandz SDK** collects events and segments, linking them to the **unique ID**.  
-
-**GDPR requirements:**  
-- Data stored only in the **EU**.  
-- User **consent** managed per GDPR.  
-- Legal **clauses** defined in the client contract.
-
-
-## Step 5 - LVMH Web Login
-- When the user logs in on the **LVMH website**, **AB Tasty recognises** them.  
-- The **unique ID** from the LVMH CRM is made available via a **cookie**.  
-- Enables **cross-channel personalisation** between web and app.
-
-
-## Step 6 - LVMH In-Store Interaction
-- The user visits an **LVMH physical store** using a **clienteling app** connected to the LVMH CRM.  
-- They identify themselves using a **QR code or barcode**.  
-- The system retrieves their **email, ID, segment, and history**.
+### Step 6 • In-Store
+- Clienteling app scans QR/barcode.  
+- Fetches ID, email, history, and segment.
 
 
 ## Database and CRM Implications
-**Key identifiers across all systems:**
-- Email address  
-- Unique ID  
-- Segment tag such as **“Gift”**  
-- QR code or barcode  
-- Account information  
 
-**LVMH CRM/Database role:**  
-Acts as the **central hub** connecting the **LVMH website**, **LVMH mobile app**, **AB Tasty and Wandz**, and **LVMH store interactions**.
+**Key identifiers:** Email, Unique ID, Segment tag (“Gift”), QR/barcode, Account info.  
+**Central role:** LVMH CRM connects web, app, and store data into one consistent user record.
+
 
 ## Notes
-- **AB Tasty** manages anonymous tracking, product recommendations and cross-channel ID linking.  
-- **LVMH CRM/Database** is the central hub connecting website, app and store.  
-- **Wandz SDK** gathers in-app events and segments for personalisation.  
-- **GDPR compliance** ensures data remains within the EU with explicit consent management.
+
+- **AB Tasty:** Tracking, recommendations, ID sync.  
+- **CRM:** Central data and segmentation hub.  
+- **Wandz SDK:** Collects in-app data.  
+- **GDPR:** Explicit consent, EU-only data storage.
+
 
 ## Development Requirements and Effort Breakdown
 
-## Overview
-This section outlines the development requirements, estimated effort, and task breakdown for implementing the omnichannel data flow between AB Tasty, CRM, web, app, and in-store systems for LVMH.
-
-
-
-## Development Requirements
-- Deploy **AB Tasty web JavaScript tag** on web properties.  
-- Implement **product recommendation strategies** on web and email.  
-- Store **unique ID** linked to CRM email in:  
-  - Web **cookie**  
-  - App **state, variable, or local storage**  
-- Ensure **“Gift” category tag** and **email payload** are transmitted correctly to the CRM/Database.  
-- Generate and maintain **unique IDs** in the CRM/Database.
-
-
-
-## Task Breakdown and Estimated Effort
-
 ### 1. AB Tasty Web Tag Deployment
-**Tasks:**  
-- Configure AB Tasty tag on staging and production.  
-- Validate tag firing across key pages (product, cart, category).  
-- Integrate event tracking (clicks, views, filters, back-in-stock CTA).  
+- Configure and validate across site.  
+- Track key actions.  
+**Effort:** 2–3 days
 
-**Estimated Effort:** 2–3 days  
-**Dependencies:** Access to tag manager and QA environment.
+### 2. Product Recommendation Strategy
+- Set up feed and Gift segment logic.  
+- Add dynamic recommendations to CRM emails.  
+**Effort:** 3–4 days
 
+### 3. Unique ID Management
+- Extend CRM API to generate/manage IDs.  
+- Sync IDs between app and web.  
+**Effort:** 5–6 days
 
+### 4. Gift Tag and Payload Transmission
+- Modify payloads to attach tag.  
+- Update CRM ingestion logic.  
+**Effort:** 2 days
 
-### 2. Product Recommendation Strategy Setup
-**Tasks:**  
-- Configure product feed integration.  
-- Define and test “Gift” segment recommendations.  
-- Implement fallback carousel for out-of-stock items.  
-- Configure dynamic recommendations in CRM email templates.
+### 5. CRM Synchronisation
+- Validate consistency, GDPR compliance.  
+**Effort:** 3–5 days
 
-**Estimated Effort:** 3–4 days  
-**Dependencies:** Product feed, CRM templates, AB Tasty configuration.
-
-
-
-### 3. Unique ID Management and Storage
-**Tasks:**  
-- Extend CRM API to generate and manage unique IDs.  
-- Map IDs to users via email during signup and app creation.  
-- Implement persistence via cookies and app local storage.  
-- Test ID consistency across web and app logins.
-
-**Estimated Effort:** 5–6 days  
-**Dependencies:** CRM API documentation, app and web development teams.
+**Total Estimated Effort:** ~15–20 days (3–4 weeks)
 
 
-
-### 4. “Gift” Tag and Email Payload Transmission
-**Tasks:**  
-- Modify AB Tasty payloads to attach “Gift” tag.  
-- Validate tagging for all tracked events.  
-- Update CRM ingestion pipeline to recognise “Gift” segment.  
-
-**Estimated Effort:** 2 days  
-**Dependencies:** CRM endpoint and AB Tasty developer access.
-
-
-
-### 5. CRM Synchronisation and Maintenance
-**Tasks:**  
-- Ensure CRM receives and maintains consistent user data.  
-- Implement audit logs for data transfer validation.  
-- Verify GDPR compliance for consent and EU storage.  
-
-**Estimated Effort:** 3–5 days  
-**Dependencies:** CRM vendor support, GDPR compliance review.
-
-
-
-## Total Estimated Effort
-| Task | Estimated Effort |
-|------|------------------|
-| AB Tasty Tag Deployment | 2–3 days |
-| Product Recommendations | 3–4 days |
-| Unique ID Management | 5–6 days |
-| Gift Tag & Payload | 2 days |
-| CRM Synchronisation | 3–5 days |
-| **Total (Approx.)** | **15–20 days (3–4 weeks)** |
-
-
-
-## Gantt Timeline (Estimated)
+## Gantt Timeline
 
 ```mermaid
 gantt
 dateFormat  YYYY-MM-DD
 title LVMH Omnichannel Implementation Timeline
+
 section AB Tasty Setup
 AB Tasty Tag Deployment          :active, des1, 2025-11-03, 3d
 Product Recommendation Strategy  :des2, after des1, 4d
+
 section CRM & Data Integration
 Unique ID Management and Storage :des3, after des2, 6d
 Gift Tag and Payload Transmission:des4, after des3, 2d
+
 section QA & Compliance
 CRM Synchronisation and QA       :des5, after des4, 5d
 GDPR Review and Final Checks     :des6, after des5, 3d
 ```
-
-**Notes:**  
-- The Gantt chart assumes sequential delivery with minor overlaps possible for testing phases.  
-- Total duration: approximately **4–5 weeks** including QA and compliance.  
-- Team coordination between AB Tasty, CRM, and app developers is essential.  
-- Weekly checkpoints recommended for progress review and risk management.
-
-
-
-
