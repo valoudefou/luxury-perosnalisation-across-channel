@@ -66,15 +66,6 @@ flowchart LR
     D1 --> D2 --> D3 --> D4 --> D5
   end
 
-  %% GDPR notes
-  subgraph G[GDPR]
-    direction TB
-    G1[Data stored in EU]
-    G2[Consent managed]
-    G3[Legal clauses in contract]
-  end
-  class G,G1,G2,G3 gdpr
-
   %% Step 5 - Web login
   subgraph S5[Step 5 • Web login]
     E1[User logs back on Web]
