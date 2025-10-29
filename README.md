@@ -168,7 +168,7 @@ Acts as the **central hub** connecting the **website**, **mobile app**, **AB Tas
 
 
 
-## Development Requirements (LVMH Implementation)
+## Development Requirements (Implementation)
 - Deploy **AB Tasty web JavaScript tag**.  
 - Implement **product recommendation strategies** on web and email.  
 - Store **unique ID** linked to CRM email in:  
