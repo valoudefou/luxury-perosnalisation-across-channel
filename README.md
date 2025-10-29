@@ -2,8 +2,8 @@
 
 ```mermaid
 flowchart TD
-    %% Session 1 - Website
-    A1[Session 1: Website Visit<br>Sept 1, 2025] --> B1[User logged in]
+    %% Session 1 - Web
+    A1[Session 1: Browsing gift webpages --> B1[Anonymous user]
     B1 --> C1[Search: Family trip to Canada<br>6 nights, Feb 2026, 2 adults, 2 children]
     C1 --> D1[Profile identified:<br>Gold loyalty member<br>Family traveler<br>Planning Canada trip]
     D1 --> E1[Browse hotels]
