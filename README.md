@@ -70,7 +70,7 @@ flowchart LR
   subgraph S5[Step 5 • Web login]
     E1[User logs back on Web]
     E2[AB Tasty recognises logged in user via unique ID in cookie]
-    E4[Cross channel personalisation achieved]
+    E3[Cross channel personalisation achieved]
     E1 --> E2 --> E3
   end
 
@@ -94,7 +94,6 @@ flowchart LR
   S4 --> S5
   C4 --> D1
   D3 --> H
-  E3 --> H
   F3 --> H
   H --- K
 ```
