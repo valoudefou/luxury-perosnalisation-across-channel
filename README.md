@@ -1,13 +1,30 @@
 # LVMH – Omnichannel Customer Journey and Data Flow
 
-This document illustrates the **end-to-end customer journey and data flow** across digital and physical touchpoints in the LVMH omnichannel ecosystem.  
-It shows how AB Tasty, CRM systems, the mobile app, and in-store clienteling connect to deliver a consistent personalised experience.
+[![Made with ❤️ by AB Tasty](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-AB%20Tasty-red.svg)](https://www.abtasty.com)
+[![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-green.svg)](#)
+[![Mermaid Diagrams](https://img.shields.io/badge/Visualised%20with-Mermaid-blue.svg)](https://mermaid.js.org)
 
 ---
 
-## 1. Overview (Flowchart)
+## Table of Contents
+1. [Overview](#overview)
+2. [Flowchart – Data Flow Between Systems](#flowchart--data-flow-between-systems)
+3. [Sequence Diagram – Customer Journey Timeline](#sequence-diagram--customer-journey-timeline)
+4. [Notes](#notes)
+5. [How to View Locally](#how-to-view-locally)
 
-The flowchart below visualises **how data moves between systems** — from the website visit to in-store interaction — and highlights GDPR compliance.
+---
+
+## Overview
+
+This documentation outlines the **end-to-end customer journey and data flow** across LVMH’s digital and physical environments.  
+It highlights how AB Tasty, CRM systems, the mobile app and in-store clienteling connect to create a unified, GDPR-compliant experience.
+
+---
+
+## Flowchart – Data Flow Between Systems
+
+The diagram below visualises how data moves across touchpoints, from **website visit** to **in-store interaction**, with GDPR controls included.
 
 ```mermaid
 %% LVMH - Omnichannel Customer Journey (Flowchart)
